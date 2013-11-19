@@ -1,0 +1,32 @@
+# roles/database/tasks/main.yml
+---
+- name: 1a. Add APT GPG signing key
+  apt_key: url=http://keyserver.ubuntu.com/pks/lookup?op=get&search=0xCBCB082A1BB943DB state=present
+
+- name: 1b. Add APT repository
+  apt_repository: repo='deb http://ftp.osuosl.org/pub/mariadb/repo/10.0/ubuntu $ansible_distribution_release main' state=present update_cache=yes
+
+- name: 1c. Install MariaDB server package
+  apt: name=mariadb-server state=present
+
+- name: 2. Start Mysql Service
+  service: name=mysql state=started enabled=true
+
+- name: Install python Mysql package #required for mysql_db tasks
+  apt: name=python-mysqldb state=present
+
+- name: 3. Create a new database
+  mysql_db: name=demo state=present collation=utf8_general_ci
+
+- name: 4. Create a database user
+  mysql_user: name=demo password=demo priv=*.*:ALL host=localhost state=present
+
+- name: 5a. Copy sample data
+  copy: src=dump.sql dest=/tmp/dump.sql
+  
+- name: 5b. Insert sample data
+  shell: cat /tmp/dump.sql | mysql -u demo -pdemo demo
+
+- name: 6. Install MySQL extension for PHP
+  apt: name=php5-mysql state=present
+
