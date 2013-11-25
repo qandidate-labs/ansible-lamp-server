@@ -1,0 +1,6 @@
+---
+- include: install_prerequisites.yml
+- include: install_xhprof.yml
+- include: install_xhgui.yml
+- include: install_xdebug.yml
+- include: install_demo.yml

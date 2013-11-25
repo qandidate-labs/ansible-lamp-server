@@ -1,0 +1,7 @@
+# profiling.yml
+---
+- hosts: all
+  roles:
+    - webserver
+    - database
+    - profiling
