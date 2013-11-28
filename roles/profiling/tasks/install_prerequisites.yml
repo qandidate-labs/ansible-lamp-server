@@ -1,0 +1,16 @@
+---
+- name: Install PECL
+  apt: pkg=php-pear state=present
+  tags: profiling
+
+- name: Install php5-dev for phpize
+  apt: pkg=php5-dev state=present
+  tags: profiling
+
+- name: Install git
+  apt: pkg=git state=present
+  tags: profiling
+
+- name: install Graphviz
+  apt: name=graphviz state=present
+  tags: profiling
