@@ -1,6 +1,6 @@
 ---
 - name: Install xdebug PECL extension
-  shell: pecl install xdebug
+  shell: pecl --soft install xdebug
   ignore_errors: true
   tags: profiling
 
