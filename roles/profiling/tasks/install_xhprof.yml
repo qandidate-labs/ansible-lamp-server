@@ -1,6 +1,6 @@
 ---
 - name: Install XHProf PECL extension
-  shell: pecl install xhprof-beta
+  shell: pecl install --soft xhprof-beta
   ignore_errors: true
   tags: profiling
 
